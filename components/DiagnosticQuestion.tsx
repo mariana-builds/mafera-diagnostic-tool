@@ -55,7 +55,7 @@ export default function DiagnosticQuestion({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 flex flex-col">
-      <SiteHeader onReset={onReset} />
+      <SiteHeader />
 
       <ProgressBar current={currentStep} total={totalSteps} onReset={onReset} />
 

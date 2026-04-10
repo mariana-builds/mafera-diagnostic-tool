@@ -27,7 +27,6 @@ interface LeadData {
 interface Props {
   scopeData: ScopeData;
   leadData: LeadData | null;
-  onReset: () => void;
 }
 
 function IconCheck() {
@@ -104,7 +103,7 @@ function IconDownload() {
   );
 }
 
-export default function ThankYouPage({ scopeData, leadData, onReset }: Props) {
+export default function ThankYouPage({ scopeData, leadData }: Props) {
   const [copied, setCopied] = useState(false);
   const calLink =
     process.env.NEXT_PUBLIC_CALENDAR_30MIN ??
@@ -196,7 +195,7 @@ export default function ThankYouPage({ scopeData, leadData, onReset }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 flex flex-col">
-      <SiteHeader onReset={onReset} />
+      <SiteHeader />
 
       <div className="flex-1 py-8 px-4">
         <div className="max-w-xl mx-auto animate-slide-up">

@@ -5,9 +5,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Pipeline Diagnostic | Get your project scope in 6 minutes",
+  title: "Scope your sales setup with Mafera",
   description:
-    "Answer a few questions about how you work today. Get a detailed scope, timeline, and ballpark quote. No commitment.",
+    "Answer a few questions about your current setup and get a detailed scope in 5 minutes.",
 };
 
 export default function RootLayout({

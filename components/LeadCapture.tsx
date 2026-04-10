@@ -22,7 +22,6 @@ interface Props {
   scopeData: ScopeData;
   onSubmit: (leadData: LeadForm) => void;
   onBack: () => void;
-  onReset: () => void;
 }
 
 function IconClipboard() {
@@ -43,7 +42,7 @@ function IconClipboard() {
   );
 }
 
-export default function LeadCapture({ scopeData, onSubmit, onBack, onReset }: Props) {
+export default function LeadCapture({ scopeData, onSubmit, onBack }: Props) {
   const [form, setForm] = useState<LeadForm>({
     name: "",
     email: "",
@@ -115,7 +114,7 @@ export default function LeadCapture({ scopeData, onSubmit, onBack, onReset }: Pr
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 flex flex-col">
-      <SiteHeader onReset={onReset} />
+      <SiteHeader />
 
       <div className="flex-1 py-8 px-4">
         <div className="max-w-xl mx-auto animate-slide-up">

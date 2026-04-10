@@ -1,5 +1,7 @@
 "use client";
 
+import SiteHeader from "./SiteHeader";
+
 interface Props {
   onStart: () => void;
 }
@@ -7,18 +9,7 @@ interface Props {
 export default function WelcomeScreen({ onStart }: Props) {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-blue-50/40">
-      {/* Header */}
-      <div className="flex items-center gap-1.5 px-6 py-4">
-        <span className="text-sm text-slate-400">powered by</span>
-        <a
-          href="https://mafera.de"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-bold text-slate-900 text-base tracking-tight hover:text-slate-600 transition-colors"
-        >
-          mafera
-        </a>
-      </div>
+      <SiteHeader />
 
       <div className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="max-w-2xl w-full text-center animate-fade-in">

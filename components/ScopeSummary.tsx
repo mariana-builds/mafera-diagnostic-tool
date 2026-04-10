@@ -42,7 +42,6 @@ interface Props {
   scopeData: ScopeData;
   onProceed: () => void;
   onBack: () => void;
-  onReset: () => void;
 }
 
 function Section({
@@ -75,7 +74,7 @@ function BulletList({ items }: { items: string[] }) {
   );
 }
 
-export default function ScopeSummary({ scopeData, onProceed, onBack, onReset }: Props) {
+export default function ScopeSummary({ scopeData, onProceed, onBack }: Props) {
   const isRegular = scopeData.flow === "regular";
   const qRange = quoteRange(scopeData.quoteLow, scopeData.quoteHigh);
   const days = `${scopeData.daysLow}–${scopeData.daysHigh} days`;
@@ -162,7 +161,7 @@ export default function ScopeSummary({ scopeData, onProceed, onBack, onReset }: 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 flex flex-col">
-      <SiteHeader onReset={onReset} />
+      <SiteHeader />
 
       <div className="flex-1 py-8 px-4">
         <div className="max-w-2xl mx-auto animate-slide-up">

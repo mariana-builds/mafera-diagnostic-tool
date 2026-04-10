@@ -221,7 +221,6 @@ export default function DiagnosticApp() {
         scopeData={getScopeData()}
         onProceed={() => setScreen("lead")}
         onBack={handleBackFromScope}
-        onReset={handleReset}
       />
     );
   }
@@ -232,7 +231,6 @@ export default function DiagnosticApp() {
         scopeData={getScopeData()}
         onSubmit={handleLeadSubmit}
         onBack={() => setScreen("scope")}
-        onReset={handleReset}
       />
     );
   }
@@ -242,7 +240,6 @@ export default function DiagnosticApp() {
       <ThankYouPage
         scopeData={getScopeData()}
         leadData={leadData}
-        onReset={handleReset}
       />
     );
   }

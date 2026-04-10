@@ -50,7 +50,7 @@ export default function DiscoveryRedirect({ onBack }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 flex flex-col">
-      <SiteHeader onReset={onBack} />
+      <SiteHeader />
 
       <div className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="max-w-lg w-full text-center animate-fade-in">
