@@ -27,6 +27,7 @@ interface LeadData {
 interface Props {
   scopeData: ScopeData;
   leadData: LeadData | null;
+  onFeedback: () => void;
 }
 
 function IconCheck() {
@@ -103,11 +104,11 @@ function IconDownload() {
   );
 }
 
-export default function ThankYouPage({ scopeData, leadData }: Props) {
+export default function ThankYouPage({ scopeData, leadData, onFeedback }: Props) {
   const [copied, setCopied] = useState(false);
   const calLink =
     process.env.NEXT_PUBLIC_CALENDAR_30MIN ??
-    "https://calendly.com/mariana-mafera/30min";
+    "https://calendar.notion.so/meet/mariana-ferreira/schedule";
 
   const qRange = quoteRange(scopeData.quoteLow, scopeData.quoteHigh);
   const days = `${scopeData.daysLow}–${scopeData.daysHigh} days`;
@@ -142,7 +143,7 @@ export default function ThankYouPage({ scopeData, leadData }: Props) {
       lines.push("• Extra training sessions beyond the handover");
       lines.push("");
       lines.push("TIMELINE");
-      getTimeline(complexity).forEach((t) => lines.push(`• ${t}`));
+      getTimeline(complexity, answers).forEach((t) => lines.push(`• ${t}`));
       lines.push("");
       lines.push("QUOTE");
       lines.push(`${qRange} | ${days}`);
@@ -194,7 +195,7 @@ export default function ThankYouPage({ scopeData, leadData }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
       <div className="flex-1 py-8 px-4">
@@ -213,7 +214,7 @@ export default function ThankYouPage({ scopeData, leadData }: Props) {
           </div>
 
           {/* Quote card */}
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 sm:p-8 mb-6">
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 mb-6">
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
               Your quote
             </p>
@@ -247,7 +248,7 @@ export default function ThankYouPage({ scopeData, leadData }: Props) {
               href={calLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold shadow-md shadow-orange-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-150"
+              className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold border border-orange-600/20 hover:-translate-y-0.5 transition-all duration-150"
             >
               <IconCalendar />
               Book kickoff call
@@ -281,6 +282,17 @@ export default function ThankYouPage({ scopeData, leadData }: Props) {
               Contact mariana@mafera.de
             </a>
           </p>
+
+          {/* Feedback nudge */}
+          <div className="mt-8 pt-6 border-t border-slate-100 text-center no-print">
+            <p className="text-sm text-slate-400 mb-2">How was your experience?</p>
+            <button
+              onClick={onFeedback}
+              className="text-sm font-medium text-slate-500 hover:text-orange-500 underline underline-offset-2 transition-colors"
+            >
+              Leave a quick rating →
+            </button>
+          </div>
 
           {/* Print-only scope */}
           <div className="print-only mt-8">

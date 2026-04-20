@@ -1,5 +1,5 @@
 export interface QuestionOption {
-  id: string; // 'A' | 'B' | 'C' | 'D'
+  id: string;
   text: string;
   score?: number;
 }
@@ -9,8 +9,60 @@ export interface Question {
   heading: string;
   text: string;
   multiSelect?: boolean;
+  type?: "select"; // renders as a dropdown instead of option buttons
   options: QuestionOption[];
 }
+
+// CRM options used in follow-up questions after Q6
+const europeanCrms = [
+  "HubSpot",
+  "Salesforce",
+  "Pipedrive",
+  "Microsoft Dynamics 365",
+  "Zoho CRM",
+  "Freshsales",
+  "ActiveCampaign",
+  "Monday CRM",
+  "Copper",
+  "Teamleader",
+  "Capsule CRM",
+  "Other",
+] as const;
+
+const crmOptions: QuestionOption[] = europeanCrms.map((crm, i) => ({
+  id: String(i + 1),
+  text: crm,
+}));
+
+// Q13 — shown when Q6 = A or C (user has a current CRM)
+export const crmCurrentQuestion: Question = {
+  id: 13,
+  heading: "Current CRM",
+  text: "Which CRM tool do you use?",
+  type: "select",
+  options: crmOptions,
+};
+
+// Q14 — shown when Q6 = D (switching tools): which to deprecate
+export const crmDeprecateQuestion: Question = {
+  id: 14,
+  heading: "CRM to deprecate",
+  text: "Which CRM tool do you want to deprecate?",
+  type: "select",
+  options: crmOptions,
+};
+
+// Q15 — shown when Q6 = D (switching tools): which to adopt
+export const crmFutureQuestion: Question = {
+  id: 15,
+  heading: "Future CRM",
+  text: "Which CRM tool will you use going forward?",
+  type: "select",
+  options: [
+    ...crmOptions,
+    { id: String(europeanCrms.length + 1), text: "Not sure" },
+  ],
+};
 
 // Regular flow: Q1–Q11
 export const questions: Question[] = [
@@ -79,8 +131,8 @@ export const questions: Question[] = [
   },
   {
     id: 4,
-    heading: "Sales tracks",
-    text: "How many different sales or partnership tracks should this system handle in the next 12–18 months?",
+    heading: "Sales profiles",
+    text: "How many different sales or partnership profiles should this system handle in the next 12–18 months?",
     options: [
       {
         id: "A",
@@ -253,9 +305,12 @@ export const automationQuestion: Question = {
   ],
 };
 
-// Helper: get a question by ID (regular + automation)
+// Helper: get a question by ID (regular + automation + CRM follow-ups)
 export function getQuestion(id: number): Question | undefined {
   if (id === 12) return automationQuestion;
+  if (id === 13) return crmCurrentQuestion;
+  if (id === 14) return crmDeprecateQuestion;
+  if (id === 15) return crmFutureQuestion;
   return questions.find((q) => q.id === id);
 }
 

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import DiagnosticQuestion from "@/components/DiagnosticQuestion";
 import ScopeSummary, { ScopeData } from "@/components/ScopeSummary";
 import LeadCapture from "@/components/LeadCapture";
 import ThankYouPage from "@/components/ThankYouPage";
+import FeedbackScreen from "@/components/FeedbackScreen";
 import DiscoveryRedirect from "@/components/DiscoveryRedirect";
 import {
   automationQuestion,
@@ -18,7 +19,7 @@ import {
   getAutomationResult,
 } from "@/lib/scoring";
 
-type Screen = "welcome" | "questions" | "scope" | "lead" | "thankyou" | "discovery";
+type Screen = "welcome" | "questions" | "scope" | "lead" | "thankyou" | "feedback" | "discovery";
 type Flow = "regular" | "automation";
 
 type Answers = Record<number, string>;
@@ -53,14 +54,20 @@ export default function DiagnosticApp() {
     []
   );
 
+  // Step counter uses history length so CRM follow-up questions count naturally
   const currentStep = useCallback((): number => {
-    if (flow === "automation") {
-      return currentQId === 12 ? 2 : 1;
-    }
-    return regularQuestionIds.indexOf(currentQId) + 1;
-  }, [flow, currentQId]);
+    if (flow === "automation") return currentQId === 12 ? 2 : 1;
+    return history.length + 1;
+  }, [flow, currentQId, history]);
 
-  const totalSteps = flow === "automation" ? 2 : regularQuestionIds.length;
+  // Total steps grows by 1 (Q6=A/C) or 2 (Q6=D) when CRM follow-ups are inserted
+  const totalSteps = useMemo(() => {
+    if (flow === "automation") return 2;
+    const q6 = answers[6];
+    if (q6 === "A" || q6 === "C") return regularQuestionIds.length + 1;
+    if (q6 === "D") return regularQuestionIds.length + 2;
+    return regularQuestionIds.length;
+  }, [flow, answers]);
 
   // ── Handlers ──────────────────────────────────────────────────────────────
 
@@ -96,6 +103,18 @@ export default function DiagnosticApp() {
         setScreen("scope");
         return;
       }
+
+      // Q6: branch into CRM follow-up questions based on answer
+      if (qId === 6) {
+        if (choice === "A" || choice === "C") { setCurrentQId(13); return; } // has existing CRM
+        if (choice === "D") { setCurrentQId(14); return; }                   // switching CRMs
+        setCurrentQId(7); return;                                             // B: no tool yet
+      }
+
+      // CRM follow-up routing → rejoin main flow at Q7
+      if (qId === 13) { setCurrentQId(7); return; }
+      if (qId === 14) { setCurrentQId(15); return; }
+      if (qId === 15) { setCurrentQId(7); return; }
 
       const next = nextQId(qId, flow);
       if (next) {
@@ -198,7 +217,7 @@ export default function DiagnosticApp() {
   }
 
   if (screen === "discovery") {
-    return <DiscoveryRedirect onBack={handleReset} />;
+    return <DiscoveryRedirect onBack={handleBack} />;
   }
 
   if (screen === "questions" && currentQuestion) {
@@ -240,8 +259,13 @@ export default function DiagnosticApp() {
       <ThankYouPage
         scopeData={getScopeData()}
         leadData={leadData}
+        onFeedback={() => setScreen("feedback")}
       />
     );
+  }
+
+  if (screen === "feedback") {
+    return <FeedbackScreen onReset={handleReset} />;
   }
 
   return null;

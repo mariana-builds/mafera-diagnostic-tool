@@ -46,10 +46,10 @@ function IconCalendar() {
 export default function DiscoveryRedirect({ onBack }: Props) {
   const calLink =
     process.env.NEXT_PUBLIC_CALENDAR_15MIN ??
-    "https://calendly.com/mariana-mafera/15min";
+    "https://calendar.notion.so/meet/mariana-ferreira/schedule";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
       <div className="flex-1 flex items-center justify-center px-4 py-16">
@@ -69,7 +69,7 @@ export default function DiscoveryRedirect({ onBack }: Props) {
           </p>
 
           {/* Why a call */}
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-8 text-left">
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-8 text-left">
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">
               Why a call first
             </p>
@@ -94,7 +94,7 @@ export default function DiscoveryRedirect({ onBack }: Props) {
             href={calLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold text-base shadow-md shadow-orange-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-150 mb-4"
+            className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold text-base border border-orange-600/20 hover:-translate-y-0.5 transition-all duration-150 mb-4"
           >
             <IconCalendar />
             Book your 15-min call
@@ -109,6 +109,13 @@ export default function DiscoveryRedirect({ onBack }: Props) {
               mariana@mafera.de
             </a>
           </p>
+
+          <button
+            onClick={onBack}
+            className="mt-5 text-sm text-slate-400 hover:text-slate-600 transition-colors"
+          >
+            ← Back
+          </button>
         </div>
       </div>
 

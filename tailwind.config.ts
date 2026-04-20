@@ -22,6 +22,18 @@ const config: Config = {
           800: "#1e3ad4",
           900: "#1730b8",
         },
+        orange: {
+          50:  "#fff4ef",
+          100: "#ffe5d9",
+          200: "#ffc8b0",
+          300: "#ffa07a",
+          400: "#ff8057",
+          500: "#FF6B35",
+          600: "#e8521c",
+          700: "#c23f15",
+          800: "#9a3010",
+          900: "#7a260d",
+        },
       },
       animation: {
         "fade-in": "fadeIn 0.3s ease-out",

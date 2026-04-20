@@ -97,7 +97,7 @@ export default function ScopeSummary({ scopeData, onProceed, onBack }: Props) {
     const automationsScope = getAutomationsScope(answers);
     const migrationScope = getMigrationScope(answers);
     const integrationsScope = getIntegrationsScope(answers);
-    timeline = getTimeline(complexity);
+    timeline = getTimeline(complexity, answers);
 
     inScope = [
       `Sales tool setup + ${pipelineCount}`,
@@ -160,7 +160,7 @@ export default function ScopeSummary({ scopeData, onProceed, onBack }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
       <div className="flex-1 py-8 px-4">
@@ -168,7 +168,7 @@ export default function ScopeSummary({ scopeData, onProceed, onBack }: Props) {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-slate-900 mb-2">
-              Your Project Scope
+              Project Scope: Your New Sales Pipeline
             </h1>
             <p className="text-slate-500 text-base">
               {isRegular
@@ -178,7 +178,7 @@ export default function ScopeSummary({ scopeData, onProceed, onBack }: Props) {
           </div>
 
           {/* Card */}
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 sm:p-8 mb-6 print-container">
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 mb-6 print-container">
             <Section title="Where you're starting">
               <p className="text-slate-700 text-sm leading-relaxed">
                 {currentSituation}
@@ -217,7 +217,7 @@ export default function ScopeSummary({ scopeData, onProceed, onBack }: Props) {
             {/* Quote block */}
             <div className="mt-6 pt-6 border-t border-slate-100">
               <div className="bg-slate-50 rounded-xl p-5">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="space-y-5">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
                       Ballpark quote
@@ -225,7 +225,7 @@ export default function ScopeSummary({ scopeData, onProceed, onBack }: Props) {
                     <p className="text-3xl font-bold text-slate-900">{qRange}</p>
                     <p className="text-sm text-slate-500 mt-0.5">{days}</p>
                   </div>
-                  <div className="text-sm text-slate-500 sm:text-right">
+                  <div className="text-sm text-slate-500">
                     <p className="font-medium text-slate-700 mb-0.5">
                       Payment terms
                     </p>
@@ -246,7 +246,7 @@ export default function ScopeSummary({ scopeData, onProceed, onBack }: Props) {
             </button>
             <button
               onClick={onProceed}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3.5 rounded-xl shadow-md shadow-orange-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-150"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3.5 rounded-xl border border-orange-600/20 hover:-translate-y-0.5 transition-all duration-150"
             >
               Get a full proposal →
             </button>

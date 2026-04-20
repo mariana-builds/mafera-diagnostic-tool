@@ -20,7 +20,7 @@ const FROM = process.env.FROM_EMAIL ?? "mariana@mafera.de";
 const CONSULTANT = process.env.CONSULTANT_EMAIL ?? "mariana@mafera.de";
 const CAL_30 =
   process.env.NEXT_PUBLIC_CALENDAR_30MIN ??
-  "https://calendly.com/mariana-mafera/30min";
+  "https://calendar.notion.so/meet/mariana-ferreira/schedule";
 
 export async function POST(req: NextRequest) {
   try {
@@ -247,7 +247,7 @@ function buildLeadEmail(name: string, scopeHtml: string): string {
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f8fafc;font-family:Inter,ui-sans-serif,system-ui,sans-serif">
   <div style="max-width:600px;margin:40px auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.1)">
-    <div style="background:#f97316;padding:32px 40px">
+    <div style="background:#FF6B35;padding:32px 40px">
       <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700">Your new sales setup: Your project scope and quote</h1>
     </div>
     <div style="padding:32px 40px">
@@ -255,10 +255,10 @@ function buildLeadEmail(name: string, scopeHtml: string): string {
         Below is a rough scope and quote for your sales pipeline improvement project. Reply to this email or book a kickoff call below when you're ready to move forward.
       </p>
       ${scopeHtml}
-      <div style="margin:32px 0 0;padding:24px;background:#fff7ed;border-radius:8px;text-align:center">
+      <div style="margin:32px 0 0;padding:24px;background:#fff4ef;border-radius:8px;text-align:center">
         <p style="margin:0 0 16px;color:#1e293b;font-weight:600;font-size:16px">Ready to get started?</p>
-        <a href="${CAL_30}" style="display:inline-block;background:#f97316;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-weight:600;font-size:15px">Book your 30-min kickoff call</a>
-        <p style="margin:16px 0 0;color:#64748b;font-size:13px">Or reply to this email · <a href="mailto:mariana@mafera.de" style="color:#f97316">mariana@mafera.de</a></p>
+        <a href="${CAL_30}" style="display:inline-block;background:#FF6B35;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-weight:600;font-size:15px">Book your 30-min kickoff call</a>
+        <p style="margin:16px 0 0;color:#64748b;font-size:13px">Or reply to this email · <a href="mailto:mariana@mafera.de" style="color:#FF6B35">mariana@mafera.de</a></p>
       </div>
     </div>
     <div style="padding:24px 40px;background:#f8fafc;border-top:1px solid #e2e8f0;text-align:center">

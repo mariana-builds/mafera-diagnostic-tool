@@ -54,7 +54,7 @@ export default function LeadCapture({ scopeData, onSubmit, onBack }: Props) {
 
   const calLink =
     process.env.NEXT_PUBLIC_CALENDAR_30MIN ??
-    "https://calendly.com/mariana-mafera/30min";
+    "https://calendar.notion.so/meet/mariana-ferreira/schedule";
 
   const qRange = quoteRange(scopeData.quoteLow, scopeData.quoteHigh);
 
@@ -113,7 +113,7 @@ export default function LeadCapture({ scopeData, onSubmit, onBack }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
       <div className="flex-1 py-8 px-4">
@@ -137,7 +137,7 @@ export default function LeadCapture({ scopeData, onSubmit, onBack }: Props) {
           </div>
 
           {/* Form */}
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 sm:p-8 mb-6">
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 mb-6">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label
@@ -228,7 +228,7 @@ export default function LeadCapture({ scopeData, onSubmit, onBack }: Props) {
                   "w-full py-4 rounded-xl font-semibold text-base transition-all duration-150",
                   loading || !form.name || !form.email || !form.company
                     ? "bg-slate-100 text-slate-400 cursor-not-allowed"
-                    : "bg-orange-500 hover:bg-orange-600 text-white shadow-md shadow-orange-200 hover:shadow-lg hover:-translate-y-0.5",
+                    : "bg-orange-500 hover:bg-orange-600 text-white border border-orange-600/20 hover:-translate-y-0.5",
                 ].join(" ")}
               >
                 {loading ? "Sending…" : "Send my scope →"}

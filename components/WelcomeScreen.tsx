@@ -8,30 +8,32 @@ interface Props {
 
 export default function WelcomeScreen({ onStart }: Props) {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-blue-50/40">
+    <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
       <div className="flex-1 flex items-center justify-center px-4 py-16">
-        <div className="max-w-2xl w-full text-center animate-fade-in">
-          <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight tracking-tight mb-5">
+        <div className="max-w-2xl lg:max-w-4xl w-full text-center animate-fade-in">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight tracking-tight mb-5 lg:whitespace-nowrap">
             Scope your{" "}
-            <em className="not-italic text-orange-500">new sales setup</em>
+            <em className="not-italic text-gradient-animate">
+              new sales setup
+            </em>
             {" "}in 5 minutes.
           </h1>
 
-          <p className="text-lg text-slate-500 leading-relaxed mb-10 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base lg:text-lg text-slate-500 leading-relaxed mb-10 max-w-xl mx-auto lg:max-w-none lg:whitespace-nowrap">
             Answer a few quick questions to get a detailed scope, timeline, and
             ballpark quote.
           </p>
 
           <button
             onClick={onStart}
-            className="bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-semibold text-lg px-10 py-4 rounded-xl shadow-lg shadow-orange-200 transition-all duration-150 hover:shadow-xl hover:shadow-orange-200 hover:-translate-y-0.5"
+            className="bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-semibold text-lg px-10 py-4 rounded-xl border border-orange-600/20 transition-all duration-150 hover:-translate-y-0.5"
           >
             Start the diagnostic →
           </button>
 
-          <p className="mt-5 text-slate-400 text-sm">
+          <p className="mt-5 text-slate-500 text-sm">
             No account or pre-payment needed.
           </p>
         </div>
