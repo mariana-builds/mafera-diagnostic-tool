@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { NextRequest, NextResponse } from "next/server";
 import { saveLead, LeadRecord } from "@/lib/db";
 import { Resend } from "resend";
@@ -15,14 +17,14 @@ import {
   quoteRange,
 } from "@/lib/scope";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = process.env.FROM_EMAIL ?? "mariana@mafera.de";
-const CONSULTANT = process.env.CONSULTANT_EMAIL ?? "mariana@mafera.de";
-const CAL_30 =
-  process.env.NEXT_PUBLIC_CALENDAR_30MIN ??
-  "https://calendar.notion.so/meet/mariana-ferreira/schedule";
-
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const FROM = process.env.FROM_EMAIL ?? "mariana@mafera.de";
+  const CONSULTANT = process.env.CONSULTANT_EMAIL ?? "mariana@mafera.de";
+  const CAL_30 =
+    process.env.NEXT_PUBLIC_CALENDAR_30MIN ??
+    "https://calendar.notion.so/meet/mariana-ferreira/schedule";
+
   try {
     const body = await req.json();
 
