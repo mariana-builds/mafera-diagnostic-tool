@@ -2,7 +2,6 @@ export const dynamic = "force-dynamic";
 
 import { NextRequest, NextResponse } from "next/server";
 import { saveLead, LeadRecord } from "@/lib/db";
-import { Resend } from "resend";
 import {
   getCurrentSituation,
   getTargetState,
@@ -18,6 +17,7 @@ import {
 } from "@/lib/scope";
 
 export async function POST(req: NextRequest) {
+  const { Resend } = await import("resend");
   const resend = new Resend(process.env.RESEND_API_KEY);
   const FROM = process.env.FROM_EMAIL ?? "mariana@mafera.de";
   const CONSULTANT = process.env.CONSULTANT_EMAIL ?? "mariana@mafera.de";
@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
         ? buildRegularScopeHtml(answers, scores, body, currentSituation, targetState, qRange, days)
         : buildAutomationScopeHtml(answers[12] ?? body.q12Choice ?? "", currentSituation, targetState, qRange, days);
 
-    const leadEmailHtml = buildLeadEmail(body.name, scopeHtml);
+    const leadEmailHtml = buildLeadEmail(body.name, scopeHtml, CAL_30);
     const notifHtml = buildNotifEmail(lead, scopeHtml);
 
     // ── Send emails ────────────────────────────────────────────────────────
@@ -242,7 +242,7 @@ function buildAutomationScopeHtml(
   `;
 }
 
-function buildLeadEmail(name: string, scopeHtml: string): string {
+function buildLeadEmail(name: string, scopeHtml: string, calLink: string): string {
   return `
 <!DOCTYPE html>
 <html>
@@ -259,7 +259,7 @@ function buildLeadEmail(name: string, scopeHtml: string): string {
       ${scopeHtml}
       <div style="margin:32px 0 0;padding:24px;background:#fff4ef;border-radius:8px;text-align:center">
         <p style="margin:0 0 16px;color:#1e293b;font-weight:600;font-size:16px">Ready to get started?</p>
-        <a href="${CAL_30}" style="display:inline-block;background:#FF6B35;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-weight:600;font-size:15px">Book your 30-min kickoff call</a>
+        <a href="${calLink}" style="display:inline-block;background:#FF6B35;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-weight:600;font-size:15px">Book your 30-min kickoff call</a>
         <p style="margin:16px 0 0;color:#64748b;font-size:13px">Or reply to this email · <a href="mailto:mariana@mafera.de" style="color:#FF6B35">mariana@mafera.de</a></p>
       </div>
     </div>
