@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Scope your sales setup with Mafera",
+  title: "Scope your sales setup with mafera",
   description:
     "Answer a few questions about your current setup and get a detailed scope in 5 minutes.",
 };

@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
         from: FROM,
         to: body.email,
         reply_to: CONSULTANT,
-        subject: "Your new sales setup: Your project scope and quote by Mafera",
+        subject: "Your new sales setup: Your project scope and quote by mafera",
         html: leadEmailHtml,
       });
     } catch (e) {
@@ -249,8 +249,11 @@ function buildLeadEmail(name: string, scopeHtml: string, calLink: string): strin
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f8fafc;font-family:Inter,ui-sans-serif,system-ui,sans-serif">
   <div style="max-width:600px;margin:40px auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.1)">
+    <div style="padding:24px 40px;background:#ffffff;border-bottom:1px solid #e2e8f0">
+      <span style="font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:22px;font-weight:700;letter-spacing:-0.3px;color:#0f172a">mafera<span style="color:#FF6B35">.</span></span>
+    </div>
     <div style="background:#FF6B35;padding:32px 40px">
-      <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700">Your new sales setup: Your project scope and quote</h1>
+      <h1 style="margin:0;color:#ffffff;font-size:20px;font-weight:700">Your new sales setup: Your project scope and quote</h1>
     </div>
     <div style="padding:32px 40px">
       <p style="color:#475569;font-size:16px;line-height:1.6;margin:0 0 24px">Hi ${name},<br><br>
