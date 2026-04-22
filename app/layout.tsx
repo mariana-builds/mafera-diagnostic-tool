@@ -24,9 +24,9 @@ export default function RootLayout({
             href="mailto:mariana@mafera.de"
             className="font-medium text-slate-700 hover:text-slate-900 underline underline-offset-2 transition-colors"
           >
-            Join the waitlist
+            Email me
           </a>{" "}
-          for exclusive access.
+          for early access.
         </div>
         {children}
       </body>
